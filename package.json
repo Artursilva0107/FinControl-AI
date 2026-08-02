@@ -1,0 +1,13 @@
+{
+  "name": "fincontrol-ai",
+  "private": true,
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev": "pnpm --parallel --filter @fincontrol/web --filter @fincontrol/api dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "db:generate": "pnpm --filter @fincontrol/api prisma:generate",
+    "db:migrate": "pnpm --filter @fincontrol/api prisma:migrate"
+  },
+  "devDependencies": { "typescript": "^5.7.3" }
+}

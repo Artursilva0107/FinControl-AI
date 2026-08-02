@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  PARTNER
+}
+enum TransactionKind {
+  INCOME
+  EXPENSE
+}
+enum TransactionStatus {
+  PENDING
+  PAID
+  CANCELLED
+}
+enum FutureExpenseStatus {
+  OPEN
+  PAID
+  CANCELLED
+}
+
+model User {
+  id String @id @default(cuid())
+  name String
+  email String @unique
+  passwordHash String
+  role Role @default(PARTNER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  transactions Transaction[] @relation("ResponsibleTransactions")
+  auditLogs AuditLog[]
+}
+
+model Category {
+  id String @id @default(cuid())
+  name String @unique
+  color String @default("#2563eb")
+  createdAt DateTime @default(now())
+  transactions Transaction[]
+  futureExpenses FutureExpense[]
+}
+
+model Product {
+  id String @id @default(cuid())
+  name String
+  sku String? @unique
+  category String?
+  cost Decimal @db.Decimal(14,2)
+  price Decimal @db.Decimal(14,2)
+  quantity Int?
+  description String?
+  imageUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  transactions Transaction[]
+}
+
+model Transaction {
+  id String @id @default(cuid())
+  kind TransactionKind
+  status TransactionStatus @default(PAID)
+  amount Decimal @db.Decimal(14,2)
+  date DateTime
+  description String
+  paymentMethod String?
+  note String?
+  categoryId String
+  productId String?
+  responsibleId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  category Category @relation(fields: [categoryId], references: [id])
+  product Product? @relation(fields: [productId], references: [id])
+  responsible User @relation("ResponsibleTransactions", fields: [responsibleId], references: [id])
+  @@index([date, kind])
+  @@index([categoryId])
+}
+
+model FutureExpense {
+  id String @id @default(cuid())
+  title String
+  amount Decimal @db.Decimal(14,2)
+  dueDate DateTime
+  status FutureExpenseStatus @default(OPEN)
+  note String?
+  reminderDays Int @default(3)
+  categoryId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  category Category @relation(fields: [categoryId], references: [id])
+}
+
+model AuditLog {
+  id String @id @default(cuid())
+  action String
+  entity String
+  entityId String
+  metadata Json?
+  userId String
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+  @@index([entity, entityId])
+}
