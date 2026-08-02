@@ -1,31 +1,84 @@
 # FinControl AI
 
-Base de produção para gestão financeira empresarial de dois usuários. O projeto é um monorepo TypeScript com aplicação web em Next.js e API REST em Fastify/Prisma.
+## Sistema Inteligente de Gestão Financeira Empresarial
 
-## Início rápido
+**FinControl AI** é uma plataforma completa de gestão financeira desenvolvida para uso interno da empresa, permitindo o controle de receitas, despesas, fluxo de caixa, produtos e análises financeiras avançadas através de Inteligência Artificial.
 
-1. Copie `.env.example` para `apps/api/.env` e ajuste as chaves.
-2. Execute `docker compose up -d`.
-3. Execute `pnpm install`, `pnpm db:generate` e `pnpm db:migrate`.
-4. Execute `pnpm dev` e abra `http://localhost:3000`.
+O sistema foi projetado para oferecer uma experiência moderna, rápida e intuitiva, com interface minimalista, sincronização em tempo real e compatibilidade com Web e iPhone.
 
-## Estrutura
+### Principais funcionalidades
 
-```
-apps/
-  api/     API REST, autenticação e Prisma
-  web/     painel financeiro responsivo
-docs/      arquitetura e API
-```
+* Dashboard financeiro em tempo real
+* Controle de entradas e saídas
+* Fluxo de caixa completo
+* Cadastro e gerenciamento de produtos
+* Controle de gastos futuros
+* Contas a pagar e receber
+* Relatórios financeiros
+* Gráficos interativos
+* Histórico completo de movimentações
+* Pesquisa e filtros avançados
+* Login seguro com autenticação JWT
+* Banco de dados PostgreSQL
+* Backup automático
+* Logs de auditoria
+* Sincronização em tempo real
+* Aplicativo para iPhone
+* Modo claro e escuro
+* Interface moderna e minimalista
 
-## Segurança
+### Inteligência Artificial
 
-Senhas são armazenadas com Argon2. O JWT deve usar uma chave forte e expirar em oito horas. A API valida payloads com Zod, usa consultas parametrizadas pelo Prisma e define CORS somente para a origem configurada. Antes de produção, configure HTTPS, rotação de segredo, backup do PostgreSQL e observabilidade.
+Integração com API de IA para fornecer:
 
-## Próximos módulos
+* Análise automática das finanças
+* Previsão de faturamento
+* Projeção de fluxo de caixa
+* Identificação de gastos desnecessários
+* Recomendações para redução de custos
+* Produtos mais e menos lucrativos
+* Comparação entre períodos
+* Insights estratégicos
+* Assistente financeiro via chat utilizando os dados do sistema
 
-- páginas de produtos, lançamentos e despesas recorrentes;
-- relatórios PDF/XLSX/CSV;
-- notificações por vencimento;
-- serviço de IA com acesso somente a resumos autorizados;
-- aplicativo Expo usando os mesmos endpoints.
+### Tecnologias
+
+**Frontend**
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* shadcn/ui
+* Framer Motion
+
+**Backend**
+
+* NestJS
+* Node.js
+* TypeScript
+
+**Banco de Dados**
+
+* PostgreSQL
+* Prisma ORM
+* Redis
+
+**Mobile**
+
+* React Native (Expo)
+
+**Infraestrutura**
+
+* Docker
+* GitHub Actions
+* Vercel
+* Railway/Render
+
+### Objetivo
+
+Desenvolver uma solução robusta, segura e escalável para centralizar toda a gestão financeira da empresa em uma única plataforma, oferecendo análises inteligentes, automação de processos e suporte à tomada de decisões por meio de Inteligência Artificial.
+
+### Status do Projeto
+
+🚧 Em desenvolvimento
